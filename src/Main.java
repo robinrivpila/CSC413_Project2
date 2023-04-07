@@ -1,5 +1,8 @@
+import javax.swing.*;
 public class Main {
     public static void main(String[] args) {
+        //new InventoryGUI();
+
 
         Container container1 = new Container(1, 12, "Me" , "you", "Banana");
         Container container2 = new Container(1, 10, "You", "Me", "notebooks");
@@ -8,5 +11,7 @@ public class Main {
         inventory1.addContainer(container1);
         inventory1.addContainer(container2);
         inventory1.print();
+
+
     }
 }
