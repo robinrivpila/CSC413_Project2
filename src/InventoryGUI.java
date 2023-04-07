@@ -76,7 +76,7 @@ public class InventoryGUI extends JFrame implements ActionListener {
         String description = desciptionTextField.getText();
         Container newContainer = new Container(id, weight, sender,reciever, description);
         inventory.addContainer(newContainer);
-        newContainer.print();
+        inventory.print();
 
     }
 }
