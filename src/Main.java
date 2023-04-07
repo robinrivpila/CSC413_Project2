@@ -1,7 +1,7 @@
 import javax.swing.*;
 public class Main {
     public static void main(String[] args) {
-        //new InventoryGUI();
+        new InventoryGUI();
 
 
         Container container1 = new Container(1, 12, "Me" , "you", "Banana");
