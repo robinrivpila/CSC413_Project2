@@ -2,6 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class InventoryGUI extends JFrame implements ActionListener {
@@ -27,32 +30,32 @@ public class InventoryGUI extends JFrame implements ActionListener {
         idLabel = new JLabel("ID Number: ");
         pane.add(idLabel);
 
-        idTextField = new JTextField("Text");
+        idTextField = new JTextField("");
         pane.add(idTextField);
 
 
         JLabel weightLabel = new JLabel("Weight(kg): ");
         pane.add(weightLabel);
 
-         weightTextField = new JTextField("Text");
+         weightTextField = new JTextField("");
         pane.add(weightTextField);
 
         JLabel senderLabel = new JLabel("Sender: ");
         pane.add(senderLabel);
 
-         senderTextField = new JTextField("Text");
+         senderTextField = new JTextField("");
         pane.add(senderTextField);
 
         JLabel receiverLabel = new JLabel("Receiver: ");
         pane.add(receiverLabel);
 
-         recieverTextField = new JTextField("Text");
+         recieverTextField = new JTextField("");
         pane.add(recieverTextField);
 
         JLabel descriptionLabel = new JLabel("Description: ");
         pane.add(descriptionLabel);
 
-         desciptionTextField = new JTextField("Text");
+         desciptionTextField = new JTextField("");
         pane.add(desciptionTextField);
 
         JButton saveButton = new JButton("Save");
@@ -68,15 +71,24 @@ public class InventoryGUI extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(e.getActionCommand());
-        int id = Integer.parseInt(idTextField.getText());
-        int weight = Integer.parseInt(weightTextField.getText());
-        String sender = senderTextField.getText();
-        String reciever = recieverTextField.getText();
-        String description = desciptionTextField.getText();
-        Container newContainer = new Container(id, weight, sender,reciever, description);
-        inventory.addContainer(newContainer);
-        inventory.print();
+
+        try {
+            System.out.println(e.getActionCommand());
+            int id = Integer.parseInt(idTextField.getText());
+            int weight = Integer.parseInt(weightTextField.getText());
+            String sender = senderTextField.getText();
+            String reciever = recieverTextField.getText();
+            String description = desciptionTextField.getText();
+            Container newContainer = new Container(id, weight, sender, reciever, description);
+            inventory.addContainer(newContainer);
+            inventory.print();
+            //inventory.saveAsCSV();
+
+        }catch (Exception ex){
+            ex.getMessage();
+        }
 
     }
+
+
 }
