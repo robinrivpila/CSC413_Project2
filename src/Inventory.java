@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class Inventory {
     private ArrayList<Container> inventoryList = new ArrayList<Container>();
+    File csvFile;
 
     public Inventory(){
 
@@ -15,8 +16,19 @@ public class Inventory {
     }
 
     public void addContainer(Container newContainer){
-        //need to figure this out
-       // inventoryList.add(newContainer);
+        if(!inventoryList.contains(newContainer)) {
+            inventoryList.add(newContainer);
+        }
+    }
+
+
+    public boolean contains(Container newContainer){
+        for(Container container: inventoryList){
+            if(container.equals(newContainer)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public void print(){
@@ -25,13 +37,5 @@ public class Inventory {
         }
     }
 
-    public void saveAsCSV() throws FileNotFoundException{
-        File csvFile = new File("containerInformation.csv");
-        PrintWriter out = new PrintWriter(csvFile);
-        out.println("id-number, weight-kg, sender-name, reciever-name, content-description"); // THIS LINE WORKS
-        for(Container container : inventoryList){
-            out.printf("%d, %d, %s, % s, %s", container.getId(), container.getWeight(), container.getSender(), container.getReciever(), container.getDescription());
-        }
-        out.close();
-    }
+
 }

@@ -36,4 +36,16 @@ public class Container {
                             "\nReciever: " + reciever +
                             "\nDescription: " + description);
     }
+
+    public boolean equals(Object object){
+        if(object instanceof Container){
+            Container newContainer = (Container)object;
+            if(newContainer.id == this.id){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        return false;
+    }
 }

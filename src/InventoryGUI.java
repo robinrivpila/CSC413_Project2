@@ -18,6 +18,8 @@ public class InventoryGUI extends JFrame implements ActionListener {
     JTextField desciptionTextField;
     Inventory inventory = new Inventory();
 
+    File csvFile;
+
     public InventoryGUI(){
         super("Inventory");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -83,11 +85,23 @@ public class InventoryGUI extends JFrame implements ActionListener {
             inventory.addContainer(newContainer);
             inventory.print();
             //inventory.saveAsCSV();
+            this.saveAsCSV();
 
         }catch (Exception ex){
             ex.getMessage();
         }
 
+    }
+
+    public void saveAsCSV() throws FileNotFoundException{
+        csvFile = new File("containerInformation.csv");
+        PrintWriter out = new PrintWriter(csvFile);
+        out.println("id-number, weight-kg, sender-name, reciever-name, content-description"); // THIS LINE WORKS
+        for(int i = 0; i < inventory.getInventoryList().size(); i++){
+            Container curContainer =(Container) inventory.getInventoryList().get(i);
+            out.printf("%d, %d, %s, %s, %s\n", curContainer.getId(), curContainer.getWeight(), curContainer.getSender(), curContainer.getReciever(), curContainer.getDescription());
+        }
+        out.close();
     }
 
 
