@@ -15,10 +15,12 @@ public class Inventory {
         return inventoryList;
     }
 
-    public void addContainer(Container newContainer){
+    public boolean addContainer(Container newContainer){
         if(!inventoryList.contains(newContainer)) {
             inventoryList.add(newContainer);
+            return true;
         }
+        return false;
     }
 
 

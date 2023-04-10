@@ -2,14 +2,14 @@ public class Container {
     private int id;
     private int weight;
     private String sender;
-    private String reciever;
+    private String receiver;
     private String description;
 
-    public Container(int id, int weight, String sender, String reciever, String description){
+    public Container(int id, int weight, String sender, String receiver, String description){
         this.id = id;
         this.weight = weight;
         this.sender = sender;
-        this.reciever = reciever;
+        this.receiver = receiver;
         this.description = description;
     }
 
@@ -22,8 +22,8 @@ public class Container {
     public String getSender(){
         return sender;
     }
-    public String getReciever(){
-        return reciever;
+    public String getReceiver(){
+        return receiver;
     }
     public String getDescription(){
         return description;
@@ -33,7 +33,7 @@ public class Container {
         System.out.println( "\nID: " + id +
                             "\nWeight: " + weight +
                             "\nSender: " + sender +
-                            "\nReciever: " + reciever +
+                            "\nReceiver: " + receiver +
                             "\nDescription: " + description);
     }
 

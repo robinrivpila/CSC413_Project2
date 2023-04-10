@@ -5,29 +5,30 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 
 public class InventoryGUI extends JFrame implements ActionListener {
+
     JPanel pane;
     JLabel idLabel;
     JTextField idTextField;
 
     JTextField weightTextField;
     JTextField senderTextField;
-    JTextField recieverTextField;
-    JTextField desciptionTextField;
+    JTextField receiverTextField;
+    JTextField descriptionTextField;
     Inventory inventory = new Inventory();
 
-    File csvFile;
+
 
     public InventoryGUI(){
         super("Inventory");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
+
         pane = new JPanel();
         GridLayout layout = new GridLayout(6,2);
         pane.setLayout(layout);
-        setSize(300,300);
+        pane.setSize(500,500);
 
         idLabel = new JLabel("ID Number: ");
         pane.add(idLabel);
@@ -51,14 +52,14 @@ public class InventoryGUI extends JFrame implements ActionListener {
         JLabel receiverLabel = new JLabel("Receiver: ");
         pane.add(receiverLabel);
 
-         recieverTextField = new JTextField("");
-        pane.add(recieverTextField);
+         receiverTextField = new JTextField("");
+        pane.add(receiverTextField);
 
         JLabel descriptionLabel = new JLabel("Description: ");
         pane.add(descriptionLabel);
 
-         desciptionTextField = new JTextField("");
-        pane.add(desciptionTextField);
+         descriptionTextField = new JTextField("");
+        pane.add(descriptionTextField);
 
         JButton saveButton = new JButton("Save");
         saveButton.addActionListener(this::actionPerformed);
@@ -79,12 +80,14 @@ public class InventoryGUI extends JFrame implements ActionListener {
             int id = Integer.parseInt(idTextField.getText());
             int weight = Integer.parseInt(weightTextField.getText());
             String sender = senderTextField.getText();
-            String reciever = recieverTextField.getText();
-            String description = desciptionTextField.getText();
-            Container newContainer = new Container(id, weight, sender, reciever, description);
-            inventory.addContainer(newContainer);
-            inventory.print();
-            //inventory.saveAsCSV();
+            String receiver = receiverTextField.getText();
+            String description = descriptionTextField.getText();
+            Container newContainer = new Container(id, weight, sender, receiver, description);
+            boolean containerAdded = inventory.addContainer(newContainer);
+            if(!containerAdded){
+                JOptionPane.showMessageDialog(this, "ID# already in use. Container not added!","Error message", JOptionPane.ERROR_MESSAGE);
+
+            }
             this.saveAsCSV();
 
         }catch (Exception ex){
@@ -94,12 +97,12 @@ public class InventoryGUI extends JFrame implements ActionListener {
     }
 
     public void saveAsCSV() throws FileNotFoundException{
-        csvFile = new File("containerInformation.csv");
+        File csvFile = new File("containerInformation.csv");
         PrintWriter out = new PrintWriter(csvFile);
-        out.println("id-number, weight-kg, sender-name, reciever-name, content-description"); // THIS LINE WORKS
+        out.println("id-number, weight-kg, sender-name, receiver-name, content-description"); // THIS LINE WORKS
         for(int i = 0; i < inventory.getInventoryList().size(); i++){
             Container curContainer =(Container) inventory.getInventoryList().get(i);
-            out.printf("%d, %d, %s, %s, %s\n", curContainer.getId(), curContainer.getWeight(), curContainer.getSender(), curContainer.getReciever(), curContainer.getDescription());
+            out.printf("%d, %d, %s, %s, %s\n", curContainer.getId(), curContainer.getWeight(), curContainer.getSender(), curContainer.getReceiver(), curContainer.getDescription());
         }
         out.close();
     }
