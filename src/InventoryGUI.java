@@ -76,7 +76,6 @@ public class InventoryGUI extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         try {
-            System.out.println(e.getActionCommand());
             int id = Integer.parseInt(idTextField.getText());
             int weight = Integer.parseInt(weightTextField.getText());
             String sender = senderTextField.getText();
